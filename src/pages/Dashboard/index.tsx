@@ -5,9 +5,10 @@ import { View, Image } from 'react-native';
 
 import formatValue from '../../utils/formatValue';
 import { useCart } from '../../hooks/cart';
-import api from '../../services/api';
 
 import FloatingCart from '../../components/FloatingCart';
+
+import api from '../../services/api';
 
 import {
   Container,
@@ -35,14 +36,16 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadProducts(): Promise<void> {
-      // TODO
+      const products = await api.get("products");
+      if(products && products.data){
+        setProducts(products.data);
+      }
     }
-
     loadProducts();
   }, []);
 
   function handleAddToCart(item: Product): void {
-    // TODO
+    addToCart(item);
   }
 
   return (
